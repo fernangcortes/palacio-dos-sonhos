@@ -8,13 +8,25 @@
   <title>Palácio dos Sonhos</title>
   <meta name="description" content="Construa seus hábitos, conquiste XP e evolua seu palácio pessoal." />
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/palacio-dos-sonhos/icon-512.png" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Palácio dos Sonhos" />
+  <meta property="og:description"
+    content="App gamificado de hábitos — construa XP, evolua seu palácio e domine sua rotina." />
+  <meta property="og:image" content="https://fernangcortes.github.io/palacio-dos-sonhos/icon-512.png" />
+  <meta property="og:url" content="https://fernangcortes.github.io/palacio-dos-sonhos/" />
+  <meta name="twitter:card" content="summary" />
+
   <!-- PWA -->
-  <link rel="manifest" href="/manifest.json" />
+  <link rel="manifest" href="/palacio-dos-sonhos/manifest.json" />
   <meta name="theme-color" content="#292524" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Palácio" />
-  <link rel="apple-touch-icon" href="/icon-512.png" />
+  <link rel="apple-touch-icon" href="/palacio-dos-sonhos/icon-512.png" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link
@@ -132,7 +144,7 @@
     // Register Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW:', err));
+        navigator.serviceWorker.register('/palacio-dos-sonhos/sw.js').catch(err => console.log('SW:', err));
       });
     }
   </script>
