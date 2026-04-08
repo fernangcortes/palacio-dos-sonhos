@@ -80,6 +80,7 @@ export interface UserProfile {
   notes: Note[]; // Changed from string to Note array
   avatarConfig?: AvatarConfig; // New avatar configuration
   theme?: 'light' | 'dark' | '8bit' | 'auto';
+  achievementState?: AchievementState; // Novo: estado das conquistas
 }
 
 export enum AppView {
@@ -89,6 +90,49 @@ export enum AppView {
   PROFILE = 'PROFILE',
   ALL_NOTES = 'ALL_NOTES', // New View
   ANALYTICS = 'ANALYTICS', // New View
+  ACHIEVEMENTS = 'ACHIEVEMENTS', // New View for Achievements
+}
+
+export type AchievementCategory = 'Construtor' | 'Arquiteto' | 'Visionário' | 'Mestre' | 'Social';
+
+export type AchievementConditionType = 
+  | 'habit_completion'      // Completar um hábito X vezes
+  | 'habit_streak'          // Manter streak de X dias
+  | 'task_completion'       // Completar X tarefas
+  | 'level_reach'           // Atingir nível X (prestígio)
+  | 'house_completed'       // Completar X casas
+  | 'note_created'          // Criar X notas
+  | 'ai_usage'              // Usar a IA X vezes
+  | 'days_active'           // Dias totais ativos no app
+  | 'perfect_week'          // Semana perfeita (todos hábitos completos)
+  | 'challenge_complete'    // Completar desafio semanal
+  ;
+
+export interface AchievementCondition {
+  type: AchievementConditionType;
+  target: number; // Valor alvo para desbloquear
+  habitId?: string; // Opcional: específico para um hábito
+  category?: string; // Opcional: específico para uma categoria
+}
+
+export interface Achievement {
+  id: string;
+  title: string;
+  description: string;
+  icon: string; // Nome do ícone (ex: 'trophy', 'star', 'fire')
+  category: AchievementCategory;
+  condition: AchievementCondition;
+  rewardXP: number; // XP bônus ao desbloquear
+  rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
+  unlocked: boolean;
+  unlockedAt?: string; // ISO date string quando foi desbloqueada
+  progress: number; // Progresso atual do usuário nesta conquista
+}
+
+export interface AchievementState {
+  achievements: Achievement[];
+  achievementPoints: number; // Pontos totais de conquistas (separado do XP normal)
+  lastCheckDate?: string; // Para otimizar verificações diárias
 }
 
 export interface GeminiAnalysisResult {

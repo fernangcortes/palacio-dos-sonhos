@@ -1,0 +1,370 @@
+import { Achievement, AchievementCategory } from '../types';
+
+/**
+ * Catálogo inicial de conquistas do aplicativo
+ * Divididas em 5 categorias: Construtor, Arquiteto, Visionário, Mestre e Social
+ */
+
+export const ACHIEVEMENT_CATALOG: Achievement[] = [
+  // ==================== CONSTRUTOR ====================
+  {
+    id: 'builder_first_habit',
+    title: 'Primeiro Passo',
+    description: 'Crie seu primeiro hábito',
+    icon: 'seedling',
+    category: 'Construtor',
+    condition: { type: 'habit_completion', target: 1 },
+    rewardXP: 50,
+    rarity: 'common',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'builder_7_day_streak',
+    title: 'Semana Consistente',
+    description: 'Mantenha um streak de 7 dias em qualquer hábito',
+    icon: 'fire',
+    category: 'Construtor',
+    condition: { type: 'habit_streak', target: 7 },
+    rewardXP: 100,
+    rarity: 'uncommon',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'builder_30_day_streak',
+    title: 'Mês de Dedicação',
+    description: 'Mantenha um streak de 30 dias em qualquer hábito',
+    icon: 'flame',
+    category: 'Construtor',
+    condition: { type: 'habit_streak', target: 30 },
+    rewardXP: 250,
+    rarity: 'rare',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'builder_100_day_streak',
+    title: 'Centenário',
+    description: 'Mantenha um streak de 100 dias em qualquer hábito',
+    icon: 'fire-alt',
+    category: 'Construtor',
+    condition: { type: 'habit_streak', target: 100 },
+    rewardXP: 500,
+    rarity: 'epic',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'builder_5_habits',
+    title: 'Rotina Estabelecida',
+    description: 'Tenha 5 hábitos ativos simultaneamente',
+    icon: 'list-ul',
+    category: 'Construtor',
+    condition: { type: 'habit_completion', target: 5 },
+    rewardXP: 150,
+    rarity: 'uncommon',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'builder_10_habits',
+    title: 'Mestre da Rotina',
+    description: 'Tenha 10 hábitos ativos simultaneamente',
+    icon: 'clipboard-list',
+    category: 'Construtor',
+    condition: { type: 'habit_completion', target: 10 },
+    rewardXP: 300,
+    rarity: 'rare',
+    unlocked: false,
+    progress: 0,
+  },
+
+  // ==================== ARQUITETO ====================
+  {
+    id: 'architect_first_house',
+    title: 'Primeira Casa',
+    description: 'Complete sua primeira casa (atingir nível máximo de XP)',
+    icon: 'home',
+    category: 'Arquiteto',
+    condition: { type: 'house_completed', target: 1 },
+    rewardXP: 200,
+    rarity: 'uncommon',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'architect_5_houses',
+    title: 'Construtor de Bairros',
+    description: 'Complete 5 casas',
+    icon: 'city',
+    category: 'Arquiteto',
+    condition: { type: 'house_completed', target: 5 },
+    rewardXP: 500,
+    rarity: 'rare',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'architect_10_houses',
+    title: 'Urbanista',
+    description: 'Complete 10 casas',
+    icon: 'building',
+    category: 'Arquiteto',
+    condition: { type: 'house_completed', target: 10 },
+    rewardXP: 1000,
+    rarity: 'epic',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'architect_level_5',
+    title: 'Aprendiz',
+    description: 'Atinga o nível 5 de prestígio',
+    icon: 'star-half-alt',
+    category: 'Arquiteto',
+    condition: { type: 'level_reach', target: 5 },
+    rewardXP: 300,
+    rarity: 'rare',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'architect_level_10',
+    title: 'Profissional',
+    description: 'Atinga o nível 10 de prestígio',
+    icon: 'star',
+    category: 'Arquiteto',
+    condition: { type: 'level_reach', target: 10 },
+    rewardXP: 750,
+    rarity: 'epic',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'architect_level_25',
+    title: 'Lenda Viva',
+    description: 'Atinga o nível 25 de prestígio',
+    icon: 'crown',
+    category: 'Arquiteto',
+    condition: { type: 'level_reach', target: 25 },
+    rewardXP: 2000,
+    rarity: 'legendary',
+    unlocked: false,
+    progress: 0,
+  },
+
+  // ==================== VISIONÁRIO ====================
+  {
+    id: 'visionary_first_ai',
+    title: 'Explorador Tecnológico',
+    description: 'Use a IA pela primeira vez',
+    icon: 'robot',
+    category: 'Visionário',
+    condition: { type: 'ai_usage', target: 1 },
+    rewardXP: 100,
+    rarity: 'common',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'visionary_10_ai',
+    title: 'Parceiro da IA',
+    description: 'Use a IA 10 vezes',
+    icon: 'brain',
+    category: 'Visionário',
+    condition: { type: 'ai_usage', target: 10 },
+    rewardXP: 300,
+    rarity: 'uncommon',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'visionary_50_ai',
+    title: 'Fusionado com a Máquina',
+    description: 'Use a IA 50 vezes',
+    icon: 'microchip',
+    category: 'Visionário',
+    condition: { type: 'ai_usage', target: 50 },
+    rewardXP: 750,
+    rarity: 'rare',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'visionary_first_note',
+    title: 'Escrevente',
+    description: 'Crie sua primeira nota',
+    icon: 'pen',
+    category: 'Visionário',
+    condition: { type: 'note_created', target: 1 },
+    rewardXP: 50,
+    rarity: 'common',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'visionary_25_notes',
+    title: 'Chronicler',
+    description: 'Crie 25 notas',
+    icon: 'book',
+    category: 'Visionário',
+    condition: { type: 'note_created', target: 25 },
+    rewardXP: 400,
+    rarity: 'uncommon',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'visionary_100_notes',
+    title: 'Biblioteca Viva',
+    description: 'Crie 100 notas',
+    icon: 'library',
+    category: 'Visionário',
+    condition: { type: 'note_created', target: 100 },
+    rewardXP: 1000,
+    rarity: 'epic',
+    unlocked: false,
+    progress: 0,
+  },
+
+  // ==================== MESTRE ====================
+  {
+    id: 'master_first_task',
+    title: 'Tarefa Cumprida',
+    description: 'Complete sua primeira tarefa',
+    icon: 'check-square',
+    category: 'Mestre',
+    condition: { type: 'task_completion', target: 1 },
+    rewardXP: 25,
+    rarity: 'common',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'master_50_tasks',
+    title: 'Executor',
+    description: 'Complete 50 tarefas',
+    icon: 'tasks',
+    category: 'Mestre',
+    condition: { type: 'task_completion', target: 50 },
+    rewardXP: 250,
+    rarity: 'uncommon',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'master_200_tasks',
+    title: 'Produtividade Máxima',
+    description: 'Complete 200 tarefas',
+    icon: 'award',
+    category: 'Mestre',
+    condition: { type: 'task_completion', target: 200 },
+    rewardXP: 600,
+    rarity: 'rare',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'master_perfect_week',
+    title: 'Semana Perfeita',
+    description: 'Tenha uma semana perfeita (todos os hábitos completos)',
+    icon: 'calendar-check',
+    category: 'Mestre',
+    condition: { type: 'perfect_week', target: 1 },
+    rewardXP: 500,
+    rarity: 'epic',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'master_365_streak',
+    title: 'Ano Ininterrupto',
+    description: 'Mantenha um streak de 365 dias',
+    icon: 'infinity',
+    category: 'Mestre',
+    condition: { type: 'habit_streak', target: 365 },
+    rewardXP: 5000,
+    rarity: 'legendary',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'master_1000_days',
+    title: 'Mil Dias de Glória',
+    description: 'Esteja ativo no app por 1000 dias',
+    icon: 'trophy',
+    category: 'Mestre',
+    condition: { type: 'days_active', target: 1000 },
+    rewardXP: 10000,
+    rarity: 'legendary',
+    unlocked: false,
+    progress: 0,
+  },
+
+  // ==================== SOCIAL ====================
+  {
+    id: 'social_first_share',
+    title: 'Compartilhador',
+    description: 'Compartilhe seu progresso pela primeira vez',
+    icon: 'share-alt',
+    category: 'Social',
+    condition: { type: 'challenge_complete', target: 1 },
+    rewardXP: 100,
+    rarity: 'common',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'social_10_challenges',
+    title: 'Desafiante',
+    description: 'Complete 10 desafios semanais',
+    icon: 'medal',
+    category: 'Social',
+    condition: { type: 'challenge_complete', target: 10 },
+    rewardXP: 400,
+    rarity: 'uncommon',
+    unlocked: false,
+    progress: 0,
+  },
+  {
+    id: 'social_50_challenges',
+    title: 'Competidor Nato',
+    description: 'Complete 50 desafios semanais',
+    icon: 'trophy-alt',
+    category: 'Social',
+    condition: { type: 'challenge_complete', target: 50 },
+    rewardXP: 1000,
+    rarity: 'rare',
+    unlocked: false,
+    progress: 0,
+  },
+];
+
+/**
+ * Helper para obter conquistas por categoria
+ */
+export function getAchievementsByCategory(category: AchievementCategory): Achievement[] {
+  return ACHIEVEMENT_CATALOG.filter(a => a.category === category);
+}
+
+/**
+ * Helper para obter conquistas por raridade
+ */
+export function getAchievementsByRarity(rarity: Achievement['rarity']): Achievement[] {
+  return ACHIEVEMENT_CATALOG.filter(a => a.rarity === rarity);
+}
+
+/**
+ * Helper para obter todas as IDs de conquistas
+ */
+export function getAllAchievementIds(): string[] {
+  return ACHIEVEMENT_CATALOG.map(a => a.id);
+}
+
+/**
+ * Helper para buscar uma conquista específica por ID
+ */
+export function getAchievementById(id: string): Achievement | undefined {
+  return ACHIEVEMENT_CATALOG.find(a => a.id === id);
+}

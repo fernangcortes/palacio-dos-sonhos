@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutGrid, ListTodo, Armchair, User, BarChart3 } from 'lucide-react';
+import { LayoutGrid, ListTodo, Armchair, User, BarChart3, Trophy } from 'lucide-react';
 import { AppView } from '../types';
 
 interface NavigationProps {
@@ -12,6 +12,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentView, setView }) 
     { id: AppView.HABITS, icon: LayoutGrid, label: 'HÁBITOS' },
     { id: AppView.TASKS, icon: ListTodo, label: 'TAREFAS' },
     { id: AppView.ANALYTICS, icon: BarChart3, label: 'STATS' },
+    { id: AppView.ACHIEVEMENTS, icon: Trophy, label: 'CONQUISTAS' },
     { id: AppView.OFFICE, icon: Armchair, label: 'SALA' },
     { id: AppView.PROFILE, icon: User, label: 'PERFIL' },
   ];
