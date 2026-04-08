@@ -6,12 +6,15 @@ import { ArchitectOffice } from './views/ArchitectOffice';
 import { ProfileView } from './views/ProfileView';
 import { NotesView } from './views/NotesView'; // New View
 import { AnalyticsView } from './views/AnalyticsView'; // New View
+import { AchievementsView } from './components/AchievementsView';
+import { AchievementModal } from './components/AchievementModal';
 import { ArchitecturalStyleView } from './views/ArchitecturalStyleView';
 import { CreateHabitModal } from './components/CreateHabitModal';
 import { CreateTaskModal } from './components/CreateTaskModal';
 import { LevelUpModal } from './components/LevelUpModal';
 import { generateHouseView } from './services/geminiService';
-import { AppView, Habit, UserProfile, ChatMessage, Task, Note, HabitDifficulty, HabitRecord } from './types';
+import { checkAndUnlockAchievements, initializeAchievementState } from './services/achievementService';
+import { AppView, Habit, UserProfile, ChatMessage, Task, Note, HabitDifficulty, HabitRecord, Achievement } from './types';
 
 const INITIAL_USER: UserProfile = {
   name: "Arquiteta",
@@ -49,6 +52,9 @@ export default function App() {
   const [showLevelUp, setShowLevelUp] = useState(false);
   const [isEvolving, setIsEvolving] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
+  
+  // Achievements state
+  const [newlyUnlockedAchievements, setNewlyUnlockedAchievements] = useState<Achievement[]>([]);
 
   // Splash screen timer
   useEffect(() => {
@@ -87,6 +93,11 @@ export default function App() {
         }
       } else if (!profile.notes) {
         profile.notes = [];
+      }
+
+      // --- MIGRATION: Initialize achievement state if missing ---
+      if (!profile.achievementState) {
+        profile.achievementState = initializeAchievementState();
       }
 
       // --- OLD DAILY TAX LOGIC OMITTED ---
@@ -285,6 +296,22 @@ export default function App() {
 
     setHabits(prev => prev.map(hb => hb.id === id ? updatedHabit : hb));
     setUserProfile(u => ({ ...u, xp: u.xp + netXpChange }));
+    
+    // Check achievements after habit action
+    setTimeout(() => {
+      const currentHabits = habitsRef.current;
+      const currentTasks = tasks;
+      const { updatedState, newlyUnlocked } = checkAndUnlockAchievements(
+        { ...userProfile, achievementState: userProfile.achievementState || initializeAchievementState() },
+        currentHabits,
+        currentTasks
+      );
+      
+      if (newlyUnlocked.length > 0) {
+        setUserProfile(u => ({ ...u, achievementState: updatedState }));
+        setNewlyUnlockedAchievements(newlyUnlocked);
+      }
+    }, 0);
   };
 
   const handleAddTaskForDate = (date: string) => {
@@ -308,6 +335,24 @@ export default function App() {
     setTasks(prev => prev.map(t =>
       t.id === id ? { ...t, completed: !t.completed } : t
     ));
+    
+    // Check achievements after task toggle
+    setTimeout(() => {
+      const currentHabits = habits;
+      const updatedTasks = tasks.map(t =>
+        t.id === id ? { ...t, completed: !t.completed } : t
+      );
+      const { updatedState, newlyUnlocked } = checkAndUnlockAchievements(
+        { ...userProfile, achievementState: userProfile.achievementState || initializeAchievementState() },
+        currentHabits,
+        updatedTasks
+      );
+      
+      if (newlyUnlocked.length > 0) {
+        setUserProfile(u => ({ ...u, achievementState: updatedState }));
+        setNewlyUnlockedAchievements(newlyUnlocked);
+      }
+    }, 0);
   };
 
   const handleDeleteTask = (id: string) => {
@@ -420,6 +465,14 @@ export default function App() {
             onChatAboutNote={handleChatAboutNote}
           />
         )}
+        {currentView === AppView.ACHIEVEMENTS && (
+          <AchievementsView
+            userProfile={userProfile}
+            habits={habits}
+            tasks={tasks}
+            onBack={() => setCurrentView(AppView.HABITS)}
+          />
+        )}
       </main>
 
       {/* Modals & Overlays */}
@@ -444,6 +497,14 @@ export default function App() {
         onClose={() => setShowLevelUp(false)}
         newLevel={userProfile.level}
       />
+
+      {/* Achievement Unlock Modal */}
+      {newlyUnlockedAchievements.length > 0 && (
+        <AchievementModal
+          achievement={newlyUnlockedAchievements[0]}
+          onClose={() => setNewlyUnlockedAchievements(prev => prev.slice(1))}
+        />
+      )}
 
       {/* Bottom Navigation */}
       <Navigation currentView={currentView === AppView.ALL_NOTES ? AppView.PROFILE : currentView} setView={setCurrentView} />
