@@ -9,132 +9,28 @@
   <meta name="description" content="Construa seus hábitos, conquiste XP e evolua seu palácio pessoal." />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/palacio-dos-sonhos/icon-512.png" />
+  <link rel="icon" type="image/png" href="/icon-512.png" />
 
   <!-- Open Graph / Social -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Palácio dos Sonhos" />
   <meta property="og:description"
     content="App gamificado de hábitos — construa XP, evolua seu palácio e domine sua rotina." />
-  <meta property="og:image" content="https://fernangcortes.github.io/palacio-dos-sonhos/icon-512.png" />
-  <meta property="og:url" content="https://fernangcortes.github.io/palacio-dos-sonhos/" />
+  <meta property="og:image" content="https://palacio-dos-sonhos.vercel.app/icon-512.png" />
+  <meta property="og:url" content="https://palacio-dos-sonhos.vercel.app/" />
   <meta name="twitter:card" content="summary" />
 
   <!-- PWA -->
-  <link rel="manifest" href="/palacio-dos-sonhos/manifest.json" />
+  <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#292524" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Palácio" />
-  <link rel="apple-touch-icon" href="/palacio-dos-sonhos/icon-512.png" />
+  <link rel="apple-touch-icon" href="/icon-512.png" />
 
-  <script src="https://cdn.tailwindcss.com"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=VT323&display=swap"
     rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            rose: {
-              50: '#fff1f2',
-              100: '#ffe4e6',
-              200: '#fecdd3',
-              300: '#fda4af',
-              400: '#fb7185',
-              900: '#881337',
-            },
-            stone: {
-              50: '#fafaf9',
-              800: '#292524',
-            },
-            amber: {
-              300: '#fcd34d',
-              400: '#fbbf24',
-              500: '#f59e0b',
-            }
-          },
-          fontFamily: {
-            serif: ['"Playfair Display"', 'serif'],
-            sans: ['"Lato"', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    /* Hide scrollbar visually but keep functionality */
-    ::-webkit-scrollbar {
-      width: 0px;
-      height: 0px;
-      display: none;
-    }
-
-    * {
-      scrollbar-width: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    /* Safe areas for notched devices */
-    body {
-      padding-top: env(safe-area-inset-top);
-      padding-bottom: env(safe-area-inset-bottom);
-    }
-
-    .pb-safe {
-      padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
-    }
-
-    /* Prevent pull-to-refresh on mobile */
-    html {
-      overscroll-behavior: none;
-    }
-
-    /* Splash screen animation */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes pulse-glow {
-
-      0%,
-      100% {
-        box-shadow: 0 0 0 0 rgba(251, 113, 133, 0.4);
-      }
-
-      50% {
-        box-shadow: 0 0 20px 10px rgba(251, 113, 133, 0);
-      }
-    }
-
-    .animate-fade-up {
-      animation: fadeUp 0.6s ease-out forwards;
-    }
-
-    .animate-pulse-glow {
-      animation: pulse-glow 2s ease-in-out infinite;
-    }
-  </style>
-  <script type="importmap">
-{
-  "imports": {
-    "@google/genai": "https://esm.sh/@google/genai@^1.40.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4"
-  }
-}
-</script>
 </head>
 
 <body class="bg-stone-50 text-stone-800 font-sans antialiased selection:bg-rose-200 selection:text-rose-900">
@@ -144,7 +40,7 @@
     // Register Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/palacio-dos-sonhos/sw.js').catch(err => console.log('SW:', err));
+        navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW:', err));
       });
     }
   </script>

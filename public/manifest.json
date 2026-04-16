@@ -2,14 +2,14 @@
     "name": "Palácio dos Sonhos",
     "short_name": "Palácio",
     "description": "Construa seus hábitos, conquiste XP e evolua seu palácio pessoal.",
-    "start_url": "/palacio-dos-sonhos/",
+    "start_url": "/",
     "display": "standalone",
     "orientation": "portrait",
     "theme_color": "#292524",
     "background_color": "#fafaf9",
     "icons": [
         {
-            "src": "/palacio-dos-sonhos/icon-512.png",
+            "src": "/icon-512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"
